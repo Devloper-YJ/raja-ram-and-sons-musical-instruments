@@ -3,7 +3,7 @@ $host = 'db-18-database18.l.aivencloud.com';
 $port = '14824';
 $db   = 'defaultdb';
 $user = 'avnadmin';
-$pass = ''; // Maine tumhara password yahan daal diya hai
+$pass = 'pass whatsoa ma hlayo he'; // Maine tumhara password yahan daal diya hai
 
 try {
     $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$db", $user, $pass);
