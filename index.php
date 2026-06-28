@@ -2,6 +2,8 @@
 // index.php
 session_start();
 require_once 'includes/db_connect.php';
+include 'includes/loading.php'; 
+
 
 // ૩. હોમપેજ પર બતાવવા માટે લેટેસ્ટ 8 પ્રોડક્ટ્સ લાવો (રેટિંગ સાથે)
 try {
@@ -39,6 +41,21 @@ try {
                 }
             }
         }
+        
+    window.addEventListener("load", function() {
+        const preloader = document.getElementById("preloader");
+        const content = document.getElementById("main-content");
+
+        // Loader ko fade out karein
+        preloader.style.opacity = "0";
+        
+        // Timeout ke baad DOM se hata dein
+        setTimeout(() => {
+            preloader.style.display = "none";
+            content.style.display = "block"; // Content show karein
+        }, 500); // 0.5s ka transition time
+    });
+
     </script>
     <style>
         .group:hover .mega-menu { display: block; }
