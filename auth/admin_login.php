@@ -1,8 +1,7 @@
 <?php
 session_start();
 // ડેટાબેઝ કનેક્શન ફાઈલ (auth ફોલ્ડરની બહાર હોવાથી ../ વાપર્યું છે)
-require_once '../db_connect.php'; 
-
+require_once '../includes/db_connect.php';
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

@@ -12,6 +12,12 @@ if (!isset($_SESSION['admin_id'])) {
 // WATERMARK LAGOVALU AUTOMATIC FUNCTION
 // ==========================================
 function applyWatermark($filePath) {
+    // Agar server par GD extension enabled nahi hai, to watermark skip kar do
+    // taaki product add hone se na ruke.
+    if (!function_exists('imagecreatefrompng')) {
+        return false;
+    }
+
     $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
     
     // Extension na hisabe image create karo

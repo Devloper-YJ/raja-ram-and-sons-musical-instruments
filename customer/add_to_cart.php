@@ -20,7 +20,7 @@ if (!isset($_SESSION['user_id'])) {
             confirmButtonColor: '#0A192F',
             confirmButtonText: 'Go to Login'
         }).then(() => {
-            window.location.href = 'login.php';
+            window.location.href = '../auth/login.php';
         });
     </script>
     </body>
