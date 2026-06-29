@@ -6,8 +6,13 @@
  */
 
 // Define the absolute path to the .env file in the project root
-$envPath = '/storage/emulated/0/Download/raja-ram-and-sons-musical-instruments/.env';
 
+//termu mobile path
+//$envPath = '/storage/emulated/0/Download/raja-ram-and-sons-musical-instruments/.env';
+
+//pc path
+define('ROOT_PATH', dirname(__DIR__));
+$envPath = ROOT_PATH . '/.env';
 // Check if .env file exists
 if (!file_exists($envPath)) {
     die("ERROR: .env file not found at: " . $envPath);

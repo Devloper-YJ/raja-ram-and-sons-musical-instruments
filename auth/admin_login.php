@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['admin_role'] = $admin['role'];
                 
                 // લોગ-ઈન થયા પછી ડેશબોર્ડ પર મોકલી દો
-                header("Location: ../admin_dashboard.php");
+                header("Location: ../admin/admin_dashboard.php");
                 exit;
             } else {
                 $error = "Incorrect password! Please try again.";
