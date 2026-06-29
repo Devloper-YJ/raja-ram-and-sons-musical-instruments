@@ -1,6 +1,8 @@
 <?php
 // signup.php
 require_once '../includes/db_connect.php';
+include 'includes/loading.php'; 
+
 
 $swal_icon = ""; $swal_title = ""; $swal_text = "";
 

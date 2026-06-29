@@ -2,7 +2,7 @@
 // login.php
 session_start();
 require_once '../includes/db_connect.php';
-include '../includes/loading.php'; 
+//include '../includes/loading.php'; 
 
 $swal_icon = ""; $swal_title = ""; $swal_text = "";
 
@@ -25,14 +25,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_name'] = $user['u_name'];
             
             $swal_icon = "success";
-            $swal_title = "Welcome Back!";
-            $swal_text = "Logged in successfully. Redirecting to store...";
+            $swal_title = "Login Successful";
+            $swal_text = "You have been signed in. Taking you to the homepage.";
             $redirect = true;
+            // Note: Yahan PHP header() se redirect nahi karte, kyunki HTML
+            // (success popup) already render ho chuka hota hai is point tak.
+            // Redirect neeche JavaScript se hota hai, popup dikhne ke baad.
+            
         } else {
             $swal_icon = "error";
-            $swal_title = "Login Failed";
-            $swal_text = "Invalid email or password. Please try again.";
-        }
+            $swal_title = "Unable to Sign In";
+            $swal_text = "The email or password you entered is incorrect.";
+}
     } catch (PDOException $e) {
         $swal_icon = "error";
         $swal_title = "Error";
@@ -48,21 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - RajaRam & Sons</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      window.addEventListener("load", function() {
-        const preloader = document.getElementById("preloader");
-        const content = document.getElementById("main-content");
-
-        // Loader ko fade out karein
-        preloader.style.opacity = "0";
-        
-        // Timeout ke baad DOM se hata dein
-        setTimeout(() => {
-            preloader.style.display = "none";
-            content.style.display = "block"; // Content show karein
-        }, 500); // 0.5s ka transition time
-    });
-    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         /* From Uiverse.io by Yaya12085 - adapted for login popup */
@@ -227,22 +216,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <span class="title <?php echo $swal_icon; ?>"><?php echo htmlspecialchars($swal_title); ?></span>
                 <p class="message"><?php echo htmlspecialchars($swal_text); ?></p>
             </div>
-            <div class="actions">
-                <button class="history" type="button" id="popupActionBtn">
-                    <?php echo isset($redirect) ? 'Continue to Home' : 'Try Again'; ?>
-                </button>
+            
             </div>
         </div>
     </div>
 
     <script>
-        document.getElementById('popupActionBtn').addEventListener('click', function() {
-            <?php if (isset($redirect)): ?>
-                window.location.href = '../index.php';
-            <?php else: ?>
-                document.getElementById('resultCard').remove();
-            <?php endif; ?>
-        });
+        
+        <?php if (isset($redirect)): ?>
+        // Login success hone par 2 second baad automatic redirect
+        setTimeout(function() {
+            window.location.href = '../index.php';
+        }, 2000);
+        <?php endif; ?>
     </script>
     <?php endif; ?>
 

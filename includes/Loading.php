@@ -1,54 +1,31 @@
-<style>
-/* 1. Ye code #preloader ko screen par fix karega */
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #ffffff; /* Page ka background color */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999999; /* Sabse upar dikhega */
-}
-
-/* 2. Aapka original loader styling */
-.loader {
-  position: relative;
-  width: 180px; /* Thoda adjust kiya */
-  height: 100px;
-}
-
-.loader div {
-  position: absolute;
-  width: 10px;
-  height: 30px;
-  background-color: #ff6a00;
-  border-radius: 5px;
-  animation: loader_51899 1.5s ease-in-out infinite;
-}
-
-.bar1 { left: 0px; animation-delay: 0s; }
-.bar2 { left: 20px; animation-delay: 0.15s; }
-.bar3 { left: 40px; animation-delay: 0.3s; }
-.bar4 { left: 60px; animation-delay: 0.45s; }
-.bar5 { left: 80px; animation-delay: 0.6s; }
-.bar6 { left: 100px; animation-delay: 0.75s; }
-.bar7 { left: 120px; animation-delay: 0.9s; }
-.bar8 { left: 140px; animation-delay: 1.05s; }
-.bar9 { left: 160px; animation-delay: 1.2s; }
-
-@keyframes loader_51899 {
-  0%, 100% { height: 30px; transform: translate(0, 0); }
-  50% { height: 70px; transform: translate(0, 35px); }
-}
-</style>
-
-<div id="preloader">
-    <div class="loader">
-        <?php for ($i = 1; $i <= 9; $i++): ?>
-            <div class="bar<?php echo $i; ?>"></div>
-        <?php endfor; ?>
+<div id="loader-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 12, 29, 0.3); backdrop-filter:blur(10px); display:none; justify-content:center; align-items:center; z-index:9999999;">
+    <div style="display:flex; align-items:center; gap:12px;">
+        <div class="v-string" style="width:6px; height:40px; background:#ff6a00; border-radius:3px; animation:vibe 0.5s infinite alternate;"></div>
+        <div class="v-string" style="width:6px; height:40px; background:#ff6a00; border-radius:3px; animation:vibe 0.5s infinite alternate 0.1s;"></div>
+        <div class="v-string" style="width:6px; height:60px; background:#ff6a00; border-radius:3px; animation:vibe 0.5s infinite alternate 0.2s;"></div>
+        <div class="v-string" style="width:6px; height:40px; background:#ff6a00; border-radius:3px; animation:vibe 0.5s infinite alternate 0.3s;"></div>
+        <div class="v-string" style="width:6px; height:40px; background:#ff6a00; border-radius:3px; animation:vibe 0.5s infinite alternate 0.4s;"></div>
     </div>
 </div>
+
+<style>
+    @keyframes vibe {
+        0% { transform: scaleY(0.5); opacity: 0.3; }
+        100% { transform: scaleY(1.8); opacity: 1; }
+    }
+</style>
+
+<script>
+    // 1. Click hote hi dikhao
+    document.addEventListener("click", function(e) {
+        let link = e.target.closest('a');
+        if (link && link.href && !link.target && !link.href.startsWith('#')) {
+            document.getElementById('loader-overlay').style.display = 'flex';
+        }
+    });
+
+    // 2. Load hote hi hatao
+    window.addEventListener("load", function() {
+        document.getElementById('loader-overlay').style.display = 'none';
+    });
+</script>
