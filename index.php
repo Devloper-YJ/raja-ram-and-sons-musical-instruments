@@ -117,7 +117,7 @@ try {
                 <div class="swiper-slide relative">
                     <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center gap-3 md:gap-10 px-5 sm:px-8 md:px-12 py-6 sm:py-10 md:py-16">
                         <div class="w-full md:w-1/2 order-1 md:order-2 flex items-center justify-center">
-                            <img src="https://images.unsplash.com/photo-1602522305295-3f701fdd0cec?q=80&w=800&auto=format&fit=crop" class="w-32 h-32 sm:w-48 sm:h-48 md:w-auto md:h-[380px] object-contain drop-shadow-2xl rounded-xl sm:rounded-none" alt="Handcrafted Dhol">
+                            <img src="./uploads/poster.png" class="w-50 h-60 sm:w-48 sm:h-48 md:w-auto md:h-[380px] object-contain drop-shadow-2xl rounded-xl sm:rounded-none" alt="Handcrafted Dhol">
                         </div>
                         <div class="w-full md:w-1/2 text-center md:text-left order-2 md:order-1">
                             <p class="text-brand-gold font-bold tracking-widest uppercase mb-1 sm:mb-2 text-[10px] sm:text-xs">Indian Heritage</p>
@@ -131,7 +131,7 @@ try {
                 <div class="swiper-slide relative">
                     <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center gap-3 md:gap-10 px-5 sm:px-8 md:px-12 py-6 sm:py-10 md:py-16">
                         <div class="w-full md:w-1/2 order-1 md:order-2 flex items-center justify-center">
-                            <img src="https://images.unsplash.com/photo-1550985616-10810253b84d?q=80&w=800&auto=format&fit=crop" class="w-50 h-60 sm:w-48 sm:h-48 md:w-auto md:h-[380px] object-cover object-center drop-shadow-2xl rounded-xl sm:rounded-none" alt="Premium Guitar">
+                            <img src="./uploads/premium-guitar.png" class="w-50 h-60 sm:w-48 sm:h-48 md:w-auto md:h-[380px] object-cover object-center drop-shadow-2xl rounded-xl sm:rounded-none" alt="Premium Guitar">
                         </div>
                         <div class="w-full md:w-1/2 text-center md:text-left order-2 md:order-1">
                             <p class="text-brand-gold font-bold tracking-widest uppercase mb-1 sm:mb-2 text-[10px] sm:text-xs">Craft Your Sound</p>
@@ -202,13 +202,14 @@ try {
                             </div>
                             
                             <?php if($p['stock_quantity'] > 0): ?>
-                            <form action="/customer/add_to_cart.php" method="POST">
-                                <input type="hidden" name="pid" value="<?php echo $p['pid']; ?>">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-slate-100 text-brand-dark hover:bg-brand-gold hover:text-white transition-colors flex items-center justify-center shadow-sm shrink-0">
-                                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
-                                </button>
-                            </form>
+<form action="/customer/add_to_cart.php" method="GET">
+    <input type="hidden" name="pid" value="<?php echo $p['pid']; ?>">
+    <input type="hidden" name="quantity" value="1">
+    <button type="submit" class="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-slate-100 text-brand-dark hover:bg-brand-gold hover:text-white transition-colors flex items-center justify-center shadow-sm shrink-0">
+        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
+    </button>
+</form>
+
                             <?php else: ?>
                             <button disabled class="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gray-100 text-gray-300 cursor-not-allowed flex items-center justify-center shrink-0">
                                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>

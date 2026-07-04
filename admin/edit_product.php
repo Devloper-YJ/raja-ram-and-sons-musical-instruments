@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $image_params = [':image' => $new_file_name];
             
             // NAVO PHOTO SERVER PAR SEV THAYA PACHI WATERMARK LAGAVO
-            applyWatermark($dest_path);
+            //applyWatermark($dest_path);
             
         } else {
              $upload_success = false;
