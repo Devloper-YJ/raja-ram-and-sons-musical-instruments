@@ -13,10 +13,22 @@
 //pc path
 define('ROOT_PATH', dirname(__DIR__));
 $envPath = ROOT_PATH . '/.env';
-// Check if .env file exists
-if (!file_exists($envPath)) {
-    die("ERROR: .env file not found at: " . $envPath);
+
+if (file_exists($envPath)) {
+    $env = parse_ini_file($envPath);
+    $host = $env['DB_HOST'];
+    $port = $env['DB_PORT'];
+    $db   = $env['DB_NAME'];
+    $user = $env['DB_USER'];
+    $pass = $env['DB_PASS'];
+} else {
+    $host = $_ENV['DB_HOST'] ?? getenv('DB_HOST');
+    $port = $_ENV['DB_PORT'] ?? getenv('DB_PORT');
+    $db   = $_ENV['DB_NAME'] ?? getenv('DB_NAME');
+    $user = $_ENV['DB_USER'] ?? getenv('DB_USER');
+    $pass = $_ENV['DB_PASS'] ?? getenv('DB_PASS');
 }
+
 
 // Parse the .env file into an associative array
 $env = parse_ini_file($envPath);
