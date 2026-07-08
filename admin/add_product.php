@@ -212,12 +212,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="bg-slate-50 p-8 rounded-xl border-2 border-dashed border-slate-300 text-center hover:bg-slate-100 transition-colors shadow-inner">
                         <label class="block text-sm font-bold text-slate-700 mb-4">Upload Product Image <span class="text-red-500">*</span></label>
                         <div class="flex items-center justify-center w-full max-w-md mx-auto">
-                            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-40 cursor-pointer bg-white rounded-xl border border-slate-200 shadow-sm hover:border-[#B7915F] transition-all">
-                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <label for="dropzone-file" id="dropzone-label" class="flex flex-col items-center justify-center w-full h-40 cursor-pointer bg-white rounded-xl border border-slate-200 shadow-sm hover:border-[#B7915F] transition-all overflow-hidden relative">
+                                <div id="dropzone-placeholder" class="flex flex-col items-center justify-center pt-5 pb-6">
                                     <svg class="w-10 h-10 mb-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                                     <p class="mb-2 text-sm text-slate-600 font-bold">Click to browse image</p>
                                     <p class="text-xs text-slate-400 font-medium">PNG, JPG or JPEG (MAX. 2MB)</p>
                                 </div>
+                                <img id="image-preview" src="" alt="Preview" class="hidden absolute inset-0 w-full h-full object-contain bg-white p-2">
+                                <button type="button" id="remove-preview" class="hidden absolute top-2 right-2 bg-white/90 text-slate-600 hover:text-red-600 rounded-full w-7 h-7 items-center justify-center shadow-sm border border-slate-200 z-10">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                </button>
                                 <input id="dropzone-file" type="file" name="product_image" accept="image/*" required class="hidden" />
                             </label>
                         </div>
@@ -234,6 +238,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </main>
+
+    <script>
+        const dropzoneFile = document.getElementById('dropzone-file');
+        const dropzonePlaceholder = document.getElementById('dropzone-placeholder');
+        const imagePreview = document.getElementById('image-preview');
+        const removePreviewBtn = document.getElementById('remove-preview');
+
+        dropzoneFile.addEventListener('change', function() {
+            const file = this.files && this.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.classList.remove('hidden');
+                dropzonePlaceholder.classList.add('hidden');
+                removePreviewBtn.classList.remove('hidden');
+                removePreviewBtn.classList.add('flex');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        removePreviewBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropzoneFile.value = '';
+            imagePreview.src = '';
+            imagePreview.classList.add('hidden');
+            dropzonePlaceholder.classList.remove('hidden');
+            removePreviewBtn.classList.add('hidden');
+            removePreviewBtn.classList.remove('flex');
+        });
+    </script>
 
     <?php if (!empty($swal_icon)): ?>
     <script>

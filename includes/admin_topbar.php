@@ -58,8 +58,9 @@ switch ($current_file) {
     <div class="flex items-center gap-4 shrink-0 ml-auto">
         <p class="text-sm font-bold text-slate-600 hidden xl:block">Welcome, <span class="text-[#B7915F]"><?php echo htmlspecialchars($_SESSION['admin_name'] ?? 'Admin'); ?></span></p>
         
-        <a href="/index.php" target="_blank" class="text-sm font-bold text-white bg-[#0A192F] px-4 py-2 rounded-lg hover:bg-[#162A4A] transition-colors flex items-center gap-1 shadow-sm shrink-0">
-            <span class="hidden md:inline">Live Store</span> ↗
+        <a href="/index.php" target="_blank" class="text-sm font-bold text-white bg-[#0A192F] px-4 py-2 rounded-lg hover:bg-[#162A4A] transition-colors flex items-center gap-1.5 shadow-sm shrink-0">
+            <span class="hidden md:inline">Live Store</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
         </a>
         
         <a href="/auth/logout.php" class="text-sm font-bold text-red-500 hover:text-white hover:bg-red-500 px-3 py-2 rounded-lg transition-colors border border-red-500/30 shrink-0">

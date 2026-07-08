@@ -69,6 +69,9 @@ try {
                     <span class="bg-brand-gold text-white w-8 h-8 rounded-full flex items-center justify-center"><?php echo strtoupper(substr($_SESSION['user_name'] ?? 'U', 0, 1)); ?></span>
                     <span class="hidden lg:inline"><?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Account'); ?></span>
                 </a>
+                <a href="/auth/logout.php" title="Logout" class="hidden md:flex items-center text-gray-400 hover:text-red-500 transition-colors p-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </a>
             <?php else: ?>
                 <a href="/auth/login.php" class="hidden md:flex flex-col items-start hover:text-brand-gold transition-colors">
                     <span class="text-[10px] text-gray-400 font-bold uppercase">Welcome</span>
@@ -104,6 +107,7 @@ try {
             <?php endforeach; ?>
             <?php if(isset($_SESSION['user_id'])): ?>
                 <a href="/customer/user_dashboard.php" class="px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50 hover:text-brand-gold border-b border-gray-50">My Account</a>
+                <a href="/auth/logout.php" class="px-5 py-3 text-sm font-bold text-red-600 hover:bg-red-50 border-b border-gray-50">Logout</a>
             <?php else: ?>
                 <a href="/auth/login.php" class="px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50 hover:text-brand-gold border-b border-gray-50">Login / Register</a>
             <?php endif; ?>

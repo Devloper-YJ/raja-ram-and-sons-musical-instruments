@@ -59,7 +59,9 @@ try {
                         <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Total Users</p>
                         <h3 class="text-3xl font-black text-[#0A192F]"><?php echo number_format($users_count); ?></h3>
                     </div>
-                    <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-xl shadow-inner">👤</div>
+                    <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center shadow-inner">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    </div>
                 </div>
 
                 <div class="bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-white/40 flex items-center justify-between border-l-4 border-l-orange-500 hover:-translate-y-1 transition-transform">
@@ -67,7 +69,9 @@ try {
                         <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Total Products</p>
                         <h3 class="text-3xl font-black text-[#0A192F]"><?php echo number_format($products_count); ?></h3>
                     </div>
-                    <div class="w-12 h-12 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center text-xl shadow-inner">🎸</div>
+                    <div class="w-12 h-12 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center shadow-inner">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"></path></svg>
+                    </div>
                 </div>
 
                 <div class="bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-white/40 flex items-center justify-between border-l-4 border-l-purple-500 hover:-translate-y-1 transition-transform">
@@ -75,11 +79,15 @@ try {
                         <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Total Orders</p>
                         <h3 class="text-3xl font-black text-[#0A192F]"><?php echo number_format($orders_count); ?></h3>
                     </div>
-                    <div class="w-12 h-12 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center text-xl shadow-inner">📦</div>
+                    <div class="w-12 h-12 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center shadow-inner">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    </div>
                 </div>
 
                 <div class="bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-white/40 flex items-center justify-between border-l-4 border-l-emerald-500 relative overflow-hidden hover:-translate-y-1 transition-transform">
-                    <div class="absolute -right-4 -bottom-4 opacity-10 text-6xl">💰</div>
+                    <div class="absolute -right-4 -bottom-4 opacity-5 text-emerald-900">
+                        <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
                     <div class="relative z-10">
                         <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Revenue (Total)</p>
                         <h3 class="text-3xl font-black text-[#0A192F]">₹<?php echo number_format($total_revenue, 2); ?></h3>
@@ -90,7 +98,9 @@ try {
             <?php if(!empty($low_stock_products)): ?>
             <div class="mb-8 bg-red-50/95 backdrop-blur-sm border border-red-200 rounded-2xl p-6 shadow-lg">
                 <div class="flex items-center gap-3 mb-4 border-b border-red-200 pb-3">
-                    <div class="w-10 h-10 bg-red-100 text-red-600 rounded-full flex justify-center items-center text-lg animate-pulse">⚠️</div>
+                    <div class="w-10 h-10 bg-red-100 text-red-600 rounded-full flex justify-center items-center animate-pulse">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    </div>
                     <div>
                         <h3 class="text-lg font-bold text-red-700">Low Stock Warning!</h3>
                         <p class="text-xs text-red-500 font-semibold uppercase tracking-wider">Please reorder the following instruments soon</p>
@@ -121,7 +131,10 @@ try {
                 
                 <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-white/40 overflow-hidden flex flex-col">
                     <div class="px-6 py-5 border-b border-slate-200 flex justify-between items-center bg-slate-50">
-                        <h3 class="font-bold text-[#0A192F] text-lg flex items-center gap-2">🌐 Online Orders</h3>
+                        <h3 class="font-bold text-[#0A192F] text-lg flex items-center gap-2">
+                            <svg class="w-5 h-5 text-[#B7915F]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0zM3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 014 9 15 15 0 01-4 9 15 15 0 01-4-9 15 15 0 014-9z"></path></svg>
+                            Online Orders
+                        </h3>
                         <a href="manage_orders.php" class="text-xs font-bold text-[#B7915F] hover:text-[#0A192F] uppercase tracking-wider transition-colors border border-[#B7915F]/30 px-3 py-1 rounded bg-[#B7915F]/10">View All</a>
                     </div>
                     <div class="overflow-x-auto flex-1 p-2">
@@ -162,7 +175,10 @@ try {
 
                 <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-white/40 overflow-hidden flex flex-col">
                     <div class="px-6 py-5 border-b border-slate-200 flex justify-between items-center bg-slate-50">
-                        <h3 class="font-bold text-[#0A192F] text-lg flex items-center gap-2">🏬 Offline POS Sales</h3>
+                        <h3 class="font-bold text-[#0A192F] text-lg flex items-center gap-2">
+                            <svg class="w-5 h-5 text-[#B7915F]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9.5L12 3l9 6.5M4.5 10v9a1 1 0 001 1h13a1 1 0 001-1v-9M9 20v-6h6v6"></path></svg>
+                            Offline POS Sales
+                        </h3>
                         <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Latest 5 Bills</span>
                     </div>
                     <div class="overflow-x-auto flex-1 p-2">
@@ -182,7 +198,8 @@ try {
                                     <tr class="hover:bg-slate-50 transition-colors">
                                         <td class="p-4 font-bold text-[#0A192F]">
                                             <a href="/billing/offline_invoice.php?sale_id=<?php echo $pos['offline_sales_id']; ?>" target="_blank" class="hover:text-blue-600 hover:underline flex items-center gap-1">
-                                                #POS-<?php echo str_pad($pos['offline_sales_id'], 4, '0', STR_PAD_LEFT); ?> ↗
+                                                #POS-<?php echo str_pad($pos['offline_sales_id'], 4, '0', STR_PAD_LEFT); ?>
+                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                             </a>
                                         </td>
                                         <td class="p-4 font-medium text-slate-700"><?php echo htmlspecialchars($pos['buyer_name']); ?></td>

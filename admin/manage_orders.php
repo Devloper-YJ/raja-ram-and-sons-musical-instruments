@@ -94,7 +94,8 @@ $orders = $pdo->query("SELECT o.*, u.u_name, p.product_name, osa.full_address
 
             <?php if(!empty($success_msg)): ?>
                 <div class="bg-emerald-50 text-emerald-600 border border-emerald-200 p-4 rounded-xl text-sm font-bold mb-6 flex items-center gap-2 shadow-sm">
-                    ✅ <?php echo $success_msg; ?>
+                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <?php echo $success_msg; ?>
                 </div>
             <?php endif; ?>
             
@@ -136,11 +137,11 @@ $orders = $pdo->query("SELECT o.*, u.u_name, p.product_name, osa.full_address
                                             <div class="flex items-center gap-2">
                                                 <label class="text-xs font-bold text-slate-500 w-24">Status:</label>
                                                 <select name="status" class="flex-1 px-2 py-1 text-xs border rounded bg-white font-bold text-slate-700 focus:ring-1 focus:ring-[#B7915F] outline-none">
-                                                    <option value="Pending" <?php echo ($o['status'] == 'Pending') ? 'selected' : ''; ?>>Pending ⏳</option>
-                                                    <option value="Packed" <?php echo ($o['status'] == 'Packed') ? 'selected' : ''; ?>>Packed 📦</option>
-                                                    <option value="Shipped" <?php echo ($o['status'] == 'Shipped') ? 'selected' : ''; ?>>Shipped 🚚</option>
-                                                    <option value="Delivered" <?php echo ($o['status'] == 'Delivered') ? 'selected' : ''; ?>>Delivered ✅</option>
-                                                    <option value="Cancelled" <?php echo ($o['status'] == 'Cancelled') ? 'selected' : ''; ?>>Cancelled ❌</option>
+                                                    <option value="Pending" <?php echo ($o['status'] == 'Pending') ? 'selected' : ''; ?>>Pending</option>
+                                                    <option value="Packed" <?php echo ($o['status'] == 'Packed') ? 'selected' : ''; ?>>Packed</option>
+                                                    <option value="Shipped" <?php echo ($o['status'] == 'Shipped') ? 'selected' : ''; ?>>Shipped</option>
+                                                    <option value="Delivered" <?php echo ($o['status'] == 'Delivered') ? 'selected' : ''; ?>>Delivered</option>
+                                                    <option value="Cancelled" <?php echo ($o['status'] == 'Cancelled') ? 'selected' : ''; ?>>Cancelled</option>
                                                 </select>
                                             </div>
                                             <div class="flex items-center gap-2">
@@ -159,10 +160,12 @@ $orders = $pdo->query("SELECT o.*, u.u_name, p.product_name, osa.full_address
                                     </td>
                                     <td class="p-4 border text-center align-top space-y-2">
                                         <a href="/billing/invoice.php?oid=<?php echo $o['oid']; ?>" target="_blank" class="flex items-center justify-center gap-1 text-blue-600 hover:text-white hover:bg-blue-600 font-bold text-[11px] uppercase tracking-wider bg-blue-50 px-3 py-2 rounded border border-blue-100 shadow-sm transition-colors">
-                                            📄 Invoice
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                            Invoice
                                         </a>
                                         <a href="shipping_label.php?oid=<?php echo $o['oid']; ?>" target="_blank" class="flex items-center justify-center gap-1 text-slate-800 hover:text-white hover:bg-slate-800 font-bold text-[11px] uppercase tracking-wider bg-slate-100 px-3 py-2 rounded border border-slate-300 shadow-sm transition-colors">
-                                            🏷️ Print Label
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                                            Print Label
                                         </a>
                                     </td>
                                     <td class="p-4 border text-center align-top">
@@ -170,7 +173,10 @@ $orders = $pdo->query("SELECT o.*, u.u_name, p.product_name, osa.full_address
                                             Save Changes
                                         </button>
                                         <?php if(strtolower($o['status']) == 'delivered'): ?>
-                                            <p class="text-[10px] text-emerald-600 font-bold mt-2">Completed ✅</p>
+                                            <p class="text-[10px] text-emerald-600 font-bold mt-2 flex items-center justify-center gap-1">
+                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                                Completed
+                                            </p>
                                         <?php endif; ?>
                                     </td>
                                 </tr>

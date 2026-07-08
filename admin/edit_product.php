@@ -187,7 +187,8 @@ if ($product_id > 0) {
                         <p class="text-sm text-slate-500 mt-1 font-medium">Update details for <span class="font-bold"><?php echo htmlspecialchars($product['product_name']); ?></span>.</p>
                     </div>
                     <a href="manage_products.php" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm transition-colors border border-slate-200 shrink-0 flex items-center gap-2">
-                        ← Back to List
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Back to List
                     </a>
                 </div>
 
@@ -231,17 +232,20 @@ if ($product_id > 0) {
                         <div class="text-left flex-1">
                             <label class="block text-sm font-bold text-slate-700 mb-1">Update Product Image</label>
                             <p class="text-xs text-slate-500 mb-4">(Leave empty if you want to keep the current image. Max 2MB)</p>
-                            <input type="file" name="product_image" accept="image/*" class="text-sm cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#B7915F]/10 file:text-[#B7915F] hover:file:bg-[#B7915F]/20">
+                            <input type="file" id="product_image_input" name="product_image" accept="image/*" class="text-sm cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#B7915F]/10 file:text-[#B7915F] hover:file:bg-[#B7915F]/20">
                         </div>
                         
-                        <?php if (!empty($product['image'])): ?>
                         <div class="w-24 h-24 bg-white border border-slate-200 rounded-lg p-1 shadow-sm shrink-0 relative group">
-                            <img src="/uploads/<?php echo htmlspecialchars($product['image']); ?>" class="w-full h-full object-cover rounded">
-                            <div class="absolute inset-0 bg-black/50 rounded flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <?php if (!empty($product['image'])): ?>
+                                <img id="current-image" src="/uploads/<?php echo htmlspecialchars($product['image']); ?>" class="w-full h-full object-cover rounded">
+                            <?php else: ?>
+                                <img id="current-image" src="" class="w-full h-full object-cover rounded hidden">
+                            <?php endif; ?>
+                            <img id="new-image-preview" src="" class="w-full h-full object-cover rounded hidden absolute inset-0 p-1">
+                            <div id="image-label" class="absolute inset-0 rounded flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <span class="text-[10px] font-bold text-white uppercase tracking-wider">Current</span>
                             </div>
                         </div>
-                        <?php endif; ?>
                     </div>
 
                     <div class="pt-6 border-t border-slate-100 flex justify-end">
@@ -255,6 +259,31 @@ if ($product_id > 0) {
             </div>
         </div>
     </main>
+
+    <script>
+        const productImageInput = document.getElementById('product_image_input');
+        const currentImage = document.getElementById('current-image');
+        const newImagePreview = document.getElementById('new-image-preview');
+        const imageLabel = document.getElementById('image-label');
+
+        if (productImageInput) {
+            productImageInput.addEventListener('change', function() {
+                const file = this.files && this.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    newImagePreview.src = e.target.result;
+                    newImagePreview.classList.remove('hidden');
+                    if (currentImage) currentImage.classList.add('hidden');
+                    imageLabel.querySelector('span').textContent = 'New';
+                    imageLabel.classList.remove('opacity-0', 'group-hover:opacity-100');
+                    imageLabel.classList.add('opacity-100');
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
 
     <?php if (!empty($swal_icon)): ?>
     <script>

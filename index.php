@@ -123,7 +123,7 @@ try {
                             <p class="text-brand-gold font-bold tracking-widest uppercase mb-1 sm:mb-2 text-[10px] sm:text-xs">Indian Heritage</p>
                             <h2 class="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-2 sm:mb-4 leading-tight">Handcrafted Kutchi<br>Dhols &amp; Tablas</h2>
                             <p class="text-gray-500 text-xs sm:text-base mb-3 sm:mb-6 max-w-md mx-auto md:mx-0 hidden sm:block">Timeless rhythm. Rich tradition.<br>Crafted with passion and precision.</p>
-                            <a href="#collection" class="inline-block border-2 border-brand-dark text-brand-dark px-5 sm:px-7 py-2 sm:py-3 font-bold rounded-full hover:bg-brand-dark hover:text-white transition-colors text-[11px] sm:text-sm uppercase tracking-wider">View Masterpieces</a>
+                            <a href="/customer/search.php" class="inline-block border-2 border-brand-dark text-brand-dark px-5 sm:px-7 py-2 sm:py-3 font-bold rounded-full hover:bg-brand-dark hover:text-white transition-colors text-[11px] sm:text-sm uppercase tracking-wider">View Masterpieces</a>
                         </div>
                     </div>
                 </div>
@@ -131,13 +131,41 @@ try {
                 <div class="swiper-slide relative">
                     <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center gap-3 md:gap-10 px-5 sm:px-8 md:px-12 py-6 sm:py-10 md:py-16">
                         <div class="w-full md:w-1/2 order-1 md:order-2 flex items-center justify-center">
-                            <img src="./uploads/premium-guitar.png" class="w-50 h-60 sm:w-48 sm:h-48 md:w-auto md:h-[380px] object-cover object-center drop-shadow-2xl rounded-xl sm:rounded-none" alt="Premium Guitar">
+                            <img src="./uploads/poster2.png" class="w-50 h-60 sm:w-48 sm:h-48 md:w-auto md:h-[380px] object-cover object-center drop-shadow-2xl rounded-xl sm:rounded-none" alt="Premium Guitar">
                         </div>
                         <div class="w-full md:w-1/2 text-center md:text-left order-2 md:order-1">
                             <p class="text-brand-gold font-bold tracking-widest uppercase mb-1 sm:mb-2 text-[10px] sm:text-xs">Craft Your Sound</p>
                             <h2 class="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-2 sm:mb-4 leading-tight">Premium Guitars<br>&amp; Strings</h2>
                             <p class="text-gray-500 text-xs sm:text-base mb-3 sm:mb-6 max-w-md mx-auto md:mx-0 hidden sm:block">Studio-grade tone. Concert-ready feel.<br>Built for every musician.</p>
-                            <a href="#collection" class="inline-block bg-brand-dark text-white px-5 sm:px-7 py-2 sm:py-3 font-bold rounded-full hover:bg-brand-gold transition-colors text-[11px] sm:text-sm uppercase tracking-wider">Explore Store</a>
+                            <a href="/customer/search.php" class="inline-block bg-brand-dark text-white px-5 sm:px-7 py-2 sm:py-3 font-bold rounded-full hover:bg-brand-gold transition-colors text-[11px] sm:text-sm uppercase tracking-wider">Explore Store</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide relative">
+                    <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center gap-3 md:gap-10 px-5 sm:px-8 md:px-12 py-6 sm:py-10 md:py-16">
+                        <div class="w-full md:w-1/2 order-1 md:order-2 flex items-center justify-center">
+                            <img src="./uploads/poster3.png" class="w-50 h-60 sm:w-48 sm:h-48 md:w-auto md:h-[380px] object-contain drop-shadow-2xl rounded-xl sm:rounded-none" alt="Classical Tabla Set">
+                        </div>
+                        <div class="w-full md:w-1/2 text-center md:text-left order-2 md:order-1">
+                            <p class="text-brand-gold font-bold tracking-widest uppercase mb-1 sm:mb-2 text-[10px] sm:text-xs">Pure Classical Tone</p>
+                            <h2 class="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-2 sm:mb-4 leading-tight">Authentic Tabla<br>&amp; Percussion Sets</h2>
+                            <p class="text-gray-500 text-xs sm:text-base mb-3 sm:mb-6 max-w-md mx-auto md:mx-0 hidden sm:block">Hand-tuned for perfect pitch.<br>Trusted by classical artists for decades.</p>
+                            <a href="/customer/search.php" class="inline-block border-2 border-brand-dark text-brand-dark px-5 sm:px-7 py-2 sm:py-3 font-bold rounded-full hover:bg-brand-dark hover:text-white transition-colors text-[11px] sm:text-sm uppercase tracking-wider">Shop Percussion</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide relative">
+                    <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center gap-3 md:gap-10 px-5 sm:px-8 md:px-12 py-6 sm:py-10 md:py-16">
+                        <div class="w-full md:w-1/2 order-1 md:order-2 flex items-center justify-center">
+                            <img src="./uploads/poster4.png" class="w-50 h-60 sm:w-48 sm:h-48 md:w-auto md:h-[380px] object-contain drop-shadow-2xl rounded-xl sm:rounded-none" alt="Harmonium">
+                        </div>
+                        <div class="w-full md:w-1/2 text-center md:text-left order-2 md:order-1">
+                            <p class="text-brand-gold font-bold tracking-widest uppercase mb-1 sm:mb-2 text-[10px] sm:text-xs">Melody in Every Note</p>
+                            <h2 class="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-2 sm:mb-4 leading-tight">Rich-Toned<br>Harmoniums</h2>
+                            <p class="text-gray-500 text-xs sm:text-base mb-3 sm:mb-6 max-w-md mx-auto md:mx-0 hidden sm:block">Smooth bellows. Warm resonance.<br>Built for devotional and stage performance.</p>
+                            <a href="/customer/search.php" class="inline-block bg-brand-dark text-white px-5 sm:px-7 py-2 sm:py-3 font-bold rounded-full hover:bg-brand-gold transition-colors text-[11px] sm:text-sm uppercase tracking-wider">Explore Store</a>
                         </div>
                     </div>
                 </div>

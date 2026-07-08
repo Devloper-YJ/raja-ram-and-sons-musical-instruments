@@ -50,7 +50,9 @@ try {
 
             <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-8">
                 <div class="bg-gradient-to-br from-[#0A192F] to-[#162A4A] p-6 rounded-2xl text-white shadow-lg relative overflow-hidden w-full md:w-64 shrink-0">
-                    <div class="absolute -right-4 -bottom-4 opacity-10 text-7xl">👥</div>
+                    <div class="absolute -right-4 -bottom-4 opacity-10 text-white">
+                        <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </div>
                     <p class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-1">Total Customers</p>
                     <h3 class="text-3xl font-black"><?php echo count($customers); ?></h3>
                 </div>
@@ -98,18 +100,21 @@ try {
                                     <td class="p-5 align-top">
                                         <div class="space-y-1.5">
                                             <p class="font-medium text-slate-700 flex items-center gap-2 customer-phone">
-                                                <span class="text-slate-400">📞</span> +91 <?php echo htmlspecialchars($c['mobile_number']); ?>
+                                                <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                                +91 <?php echo htmlspecialchars($c['mobile_number']); ?>
                                             </p>
                                             
                                             <?php if(!empty($c['email_id'])): ?>
                                                 <p class="font-medium text-slate-500 flex items-center gap-2 text-xs">
-                                                    <span class="text-slate-400">✉️</span> <?php echo htmlspecialchars($c['email_id']); ?>
+                                                    <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                                    <?php echo htmlspecialchars($c['email_id']); ?>
                                                 </p>
                                             <?php endif; ?>
 
                                             <?php if(!empty($c['user_address'])): ?>
                                                 <p class="font-semibold text-slate-600 flex items-start gap-2 mt-2 text-xs bg-slate-50 p-2.5 rounded-lg w-max max-w-sm leading-relaxed border border-slate-100 shadow-inner">
-                                                    <span class="text-slate-400">🏠</span> <?php echo htmlspecialchars($c['user_address']); ?>
+                                                    <svg class="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                                                    <?php echo htmlspecialchars($c['user_address']); ?>
                                                 </p>
                                             <?php else: ?>
                                                 <p class="text-xs text-slate-400 mt-2 font-medium italic">No address provided</p>

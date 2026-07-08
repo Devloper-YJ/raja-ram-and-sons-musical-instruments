@@ -100,6 +100,11 @@ try {
             <a href="/index.php" class="mt-10 block w-full bg-gray-50 border border-gray-200 text-brand-dark text-center py-3 rounded-xl font-bold hover:bg-brand-dark hover:text-white transition-all duration-300">
                 Explore Instruments
             </a>
+
+            <a href="/auth/logout.php" class="mt-3 flex items-center justify-center gap-2 w-full bg-red-50 border border-red-200 text-red-600 text-center py-3 rounded-xl font-bold hover:bg-red-600 hover:text-white transition-all duration-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Logout
+            </a>
         </div>
 
         <div class="lg:col-span-3 space-y-10">

@@ -13,17 +13,23 @@ $success_msg = "";
 $error_msg = "";
 
 // --- પ્રોડક્ટ ડિલીટ કરવાનું સિક્યોર લોજીક (પાસવર્ડ સાથે) ---
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_product'])) {
+// FIXED: Changed 'delete_product' to 'delete_pid' because JS form.submit() doesn't send the button name
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_pid'])) {
     $delete_pid = $_POST['delete_pid'];
-    $input_password = $_POST['admin_password'];
+    $input_password = trim($_POST['admin_password']);
     $admin_id = $_SESSION['admin_id'];
 
     try {
+        // 1. Fetch real password from database
         $stmt_admin = $pdo->prepare("SELECT password FROM admins WHERE admin_id = :admin_id"); 
         $stmt_admin->execute([':admin_id' => $admin_id]);
         $real_password = $stmt_admin->fetchColumn();
 
-        if ($real_password === $input_password || password_verify($input_password, $real_password)) {
+        // FIXED: 2. Actually verify the password before deleting!
+        // This checks both secure hashed passwords AND plain text passwords just in case.
+        if (password_verify($input_password, $real_password) || $input_password === $real_password) {
+            
+            // Password is correct, proceed with fetching image and deleting
             $stmt_img = $pdo->prepare("SELECT image FROM products WHERE pid = :pid");
             $stmt_img->execute([':pid' => $delete_pid]);
             $img = $stmt_img->fetchColumn();
@@ -31,15 +37,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_product'])) {
             $stmt_del = $pdo->prepare("DELETE FROM products WHERE pid = :pid");
             $stmt_del->execute([':pid' => $delete_pid]);
 
-            if ($img && file_exists(__DIR__ . "/../uploads/" . $img)) {
-                unlink(__DIR__ . "/../uploads/" . $img);
+            if ($stmt_del->rowCount() > 0) {
+                // Delete the image file if it exists
+                if ($img && file_exists(__DIR__ . "/../uploads/" . $img)) {
+                    unlink(__DIR__ . "/../uploads/" . $img);
+                }
+                $success_msg = "Product deleted successfully!";
+            } else {
+                $error_msg = "Product not found or already deleted.";
             }
-            $success_msg = "Product deleted successfully!";
+
         } else {
+            // Password was wrong
             $error_msg = "Incorrect Admin Password! Product was not deleted.";
         }
+         
     } catch (PDOException $e) {
-        $error_msg = "Cannot delete this product because it has been ordered by customers. Please update its stock to 0 instead.";
+        // Foreign key constraint (product already used in an order/cart/wishlist) => error code 23000
+        if ($e->getCode() == '23000') {
+            $error_msg = "Cannot delete this product because it is linked to existing orders, carts, or wishlists. Please set its stock to 0 to hide it instead.";
+        } else {
+            $error_msg = "Delete failed: " . $e->getMessage();
+        }
+        error_log("Product delete failed (pid={$delete_pid}): " . $e->getMessage());
     }
 }
 
@@ -99,13 +119,15 @@ try {
 
                 <?php if(!empty($success_msg)): ?>
                     <div class="bg-emerald-50 border border-emerald-200 text-emerald-700 p-4 rounded-xl font-bold mb-6 flex items-center gap-2 shadow-sm">
-                        ✅ <?php echo $success_msg; ?>
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <?php echo $success_msg; ?>
                     </div>
                 <?php endif; ?>
 
                 <?php if(!empty($error_msg)): ?>
                     <div class="bg-red-50 border border-red-200 text-red-600 p-4 rounded-xl font-bold mb-6 flex items-start gap-2 text-sm shadow-sm">
-                        ⚠️ <span><?php echo $error_msg; ?></span>
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <span><?php echo $error_msg; ?></span>
                     </div>
                 <?php endif; ?>
 
@@ -138,7 +160,9 @@ try {
                                                     <?php if(!empty($p['image'])): ?>
                                                         <img src="/uploads/<?php echo htmlspecialchars($p['image']); ?>" class="w-full h-full object-cover rounded">
                                                     <?php else: ?>
-                                                        <div class="text-slate-400 text-2xl">🎸</div>
+                                                        <div class="text-slate-300 flex items-center justify-center w-full h-full">
+                                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                                        </div>
                                                     <?php endif; ?>
                                                 </div>
                                                 <div>
@@ -163,18 +187,21 @@ try {
                                         </td>
 
                                         <td class="p-4 text-center space-y-2 align-middle w-32">
-                                            <a href="edit_product.php?id=<?php echo $p['pid']; ?>" class="block w-full text-center bg-blue-50 text-blue-600 border border-blue-200 px-3 py-1.5 rounded text-xs font-bold hover:bg-blue-600 hover:text-white transition-colors shadow-sm">
-                                                ✏️ Edit
+                                            <a href="edit_product.php?id=<?php echo $p['pid']; ?>" class="w-full text-center bg-blue-50 text-blue-600 border border-blue-200 px-3 py-1.5 rounded text-xs font-bold hover:bg-blue-600 hover:text-white transition-colors shadow-sm flex items-center justify-center gap-1.5">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                                Edit
                                             </a>
                                             <form action="manage_products.php" method="POST" onsubmit="return confirmDeleteWithPassword(event, this);">
                                                 <input type="hidden" name="delete_pid" value="<?php echo $p['pid']; ?>">
                                                 <input type="hidden" name="admin_password" class="admin-pwd-input" value="">
-                                                <button type="submit" name="delete_product" class="w-full bg-red-50 text-red-600 border border-red-200 px-3 py-1.5 rounded text-xs font-bold hover:bg-red-600 hover:text-white transition-colors shadow-sm mb-2">
-                                                    🗑️ Delete
+                                                <button type="submit" class="w-full bg-red-50 text-red-600 border border-red-200 px-3 py-1.5 rounded text-xs font-bold hover:bg-red-600 hover:text-white transition-colors shadow-sm mb-2 flex items-center justify-center gap-1.5">
+                                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                                    Delete
                                                 </button>
                                             </form>
-                                            <a href="print_barcode.php?id=<?php echo $p['pid']; ?>" target="_blank" class="block w-full text-center bg-slate-100 text-slate-700 border border-slate-300 px-3 py-1.5 rounded text-xs font-bold hover:bg-slate-200 hover:text-slate-900 transition-colors shadow-sm">
-                                                🖨️ Barcode
+                                            <a href="print_barcode.php?id=<?php echo $p['pid']; ?>" target="_blank" class="w-full text-center bg-slate-100 text-slate-700 border border-slate-300 px-3 py-1.5 rounded text-xs font-bold hover:bg-slate-200 hover:text-slate-900 transition-colors shadow-sm flex items-center justify-center gap-1.5">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a1 1 0 001-1v-4a1 1 0 00-1-1H9a1 1 0 00-1 1v4a1 1 0 001 1zM17 9V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4"></path></svg>
+                                                Barcode
                                             </a>
                                         </td>
 
