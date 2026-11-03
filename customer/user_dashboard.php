@@ -51,16 +51,15 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account - RajaRam & Sons</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
                     colors: {
-                        brand: { dark: '#0A192F', gold: '#B7915F', hover: '#D4AF37', light: '#F8FAFC' }
+                        brand: { 'dark': '#0A192F', 'accent': '#B7915F', 'accent-light': '#D4AF37', 'light': '#F8FAFC', 'cream': '#FDFBF6' }
                     },
+                    fontFamily: { 'sans': ['Inter', 'sans-serif'], 'display': ['Playfair Display', 'serif'] },
                     animation: { 'fade-in-up': 'fadeInUp 0.6s ease-out forwards' },
                     keyframes: { fadeInUp: { '0%': { opacity: 0, transform: 'translateY(20px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } } }
                 }
@@ -68,42 +67,52 @@ try {
         }
     </script>
 </head>
-<body class="bg-brand-light font-sans antialiased text-gray-800 flex flex-col min-h-screen">
+<body class="bg-brand-cream font-sans antialiased text-slate-800">
 
-    <?php include '../includes/header.php'; ?>
+    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-brand-light/50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/index.php" class="flex flex-col group">
+                <h1 class="text-3xl font-extrabold font-display text-transparent bg-clip-text bg-gradient-to-r from-brand-dark to-brand-accent tracking-tight">RajaRam & Sons</h1>
+                <p class="text-brand-muted text-[10px] tracking-[0.3em] uppercase font-bold mt-0.5">The Grand Music Mall</p>
+            </a>
+            <div class="flex items-center gap-6 text-sm font-bold">
+                <a href="/index.php" class="text-brand-dark hover:text-brand-accent transition-colors">Home Store</a>
+                <a href="cart.php" class="text-brand-dark hover:text-brand-accent transition-colors flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    Cart (<?php echo $cart_count; ?>)
+                </a>
+                <a href="/auth/logout.php" class="bg-red-50 text-red-500 px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white transition-all shadow-sm">Logout</a>
+            </div>
+        </div>
+    </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-4 gap-10 items-start flex-1 w-full">
+    <main class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-4 gap-10 items-start">
         
-        <div class="lg:col-span-1 bg-white rounded-3xl shadow-[0_15px_40px_rgba(10,25,47,0.06)] border border-gray-100 p-8 animate-fade-in-up">
-            <div class="text-center border-b border-gray-100 pb-8 mb-8 relative">
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-brand-gold/20 rounded-full blur-xl"></div>
+        <div class="lg:col-span-1 bg-white rounded-3xl shadow-[0_15px_40px_rgba(10,25,47,0.06)] border border-brand-light p-8 animate-fade-in-up">
+            <div class="text-center border-b border-slate-100 pb-8 mb-8 relative">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-brand-accent/20 rounded-full blur-xl"></div>
                 
-                <div class="relative w-28 h-28 mx-auto bg-gradient-to-tr from-brand-dark to-[#162A4A] rounded-full border-4 border-white shadow-xl flex items-center justify-center text-4xl font-extrabold text-brand-hover mb-4 font-serif">
+                <div class="relative w-28 h-28 mx-auto bg-gradient-to-tr from-brand-dark to-[#162A4A] rounded-full border-4 border-white shadow-xl flex items-center justify-center text-4xl font-extrabold text-brand-accent-light mb-4 font-display">
                     <?php echo strtoupper(substr($user['u_name'], 0, 1)); ?>
                 </div>
                 
-                <h2 class="text-2xl font-bold text-brand-dark font-serif"><?php echo htmlspecialchars($user['u_name']); ?></h2>
-                <p class="text-brand-gold font-semibold text-sm mt-1 uppercase tracking-widest">Premium Member</p>
+                <h2 class="text-2xl font-bold text-brand-dark font-display"><?php echo htmlspecialchars($user['u_name']); ?></h2>
+                <p class="text-brand-accent font-semibold text-sm mt-1 uppercase tracking-widest">Premium Member</p>
             </div>
 
             <div class="space-y-6 text-sm">
                 <div>
-                    <p class="text-gray-400 font-bold uppercase tracking-wider text-xs mb-1">Email Address</p>
-                    <p class="text-gray-700 font-medium flex items-center gap-2"><svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg> <?php echo htmlspecialchars($user['email_id']); ?></p>
+                    <p class="text-slate-400 font-bold uppercase tracking-wider text-xs mb-1">Email Address</p>
+                    <p class="text-slate-700 font-medium flex items-center gap-2"><svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg> <?php echo htmlspecialchars($user['email_id']); ?></p>
                 </div>
                 <div>
-                    <p class="text-gray-400 font-bold uppercase tracking-wider text-xs mb-1">Mobile Number</p>
-                    <p class="text-gray-700 font-medium flex items-center gap-2"><svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg> +91 <?php echo htmlspecialchars($user['mobile_number']); ?></p>
+                    <p class="text-slate-400 font-bold uppercase tracking-wider text-xs mb-1">Mobile Number</p>
+                    <p class="text-slate-700 font-medium flex items-center gap-2"><svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg> +91 <?php echo htmlspecialchars($user['mobile_number']); ?></p>
                 </div>
             </div>
             
-            <a href="/index.php" class="mt-10 block w-full bg-gray-50 border border-gray-200 text-brand-dark text-center py-3 rounded-xl font-bold hover:bg-brand-dark hover:text-white transition-all duration-300">
+            <a href="/index.php" class="mt-10 block w-full bg-slate-50 border border-slate-200 text-brand-dark text-center py-3 rounded-xl font-bold hover:bg-brand-dark hover:text-white transition-all duration-300">
                 Explore Instruments
-            </a>
-
-            <a href="/auth/logout.php" class="mt-3 flex items-center justify-center gap-2 w-full bg-red-50 border border-red-200 text-red-600 text-center py-3 rounded-xl font-bold hover:bg-red-600 hover:text-white transition-all duration-300">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                Logout
             </a>
         </div>
 
@@ -113,12 +122,12 @@ try {
                 <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23b7915f\' fill-opacity=\'0.1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
                 <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
                     <div>
-                        <p class="text-brand-hover font-bold tracking-widest uppercase text-sm mb-2">Welcome Back to the Symphony</p>
-                        <h2 class="text-3xl md:text-5xl font-extrabold font-serif text-white drop-shadow-lg">Hello, <?php echo htmlspecialchars($user['u_name']); ?>! 🎶</h2>
+                        <p class="text-brand-accent-light font-bold tracking-widest uppercase text-sm mb-2">Welcome Back to the Symphony</p>
+                        <h2 class="text-3xl md:text-5xl font-extrabold font-display text-white drop-shadow-lg">Hello, <?php echo htmlspecialchars($user['u_name']); ?>! 🎶</h2>
                     </div>
                     <div class="flex gap-4">
                         <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 text-center min-w-[120px]">
-                            <p class="text-4xl font-extrabold text-brand-hover font-serif"><?php echo $total_orders; ?></p>
+                            <p class="text-4xl font-extrabold text-brand-accent-light font-display"><?php echo $total_orders; ?></p>
                             <p class="text-white/80 text-xs font-bold uppercase tracking-wider mt-1">Total Orders</p>
                         </div>
                     </div>
@@ -128,7 +137,7 @@ try {
             <div class="bg-white rounded-3xl shadow-[0_15px_40px_rgba(10,25,47,0.04)] border border-brand-light p-8 animate-fade-in-up" style="animation-delay: 200ms;">
                 <div class="flex justify-between items-end mb-8">
                     <div>
-                        <h3 class="text-2xl font-extrabold font-serif text-brand-dark">My Orders History</h3>
+                        <h3 class="text-2xl font-extrabold font-display text-brand-dark">My Orders History</h3>
                         <p class="text-slate-500 text-sm mt-1">Track your recent musical purchases</p>
                     </div>
                 </div>
@@ -154,7 +163,7 @@ try {
                                         </div>
                                         <p class="text-slate-500 font-bold text-lg">No orders found.</p>
                                         <p class="text-slate-400 text-sm mt-1 mb-6">You haven't placed any orders yet.</p>
-                                        <a href="/index.php" class="text-brand-gold font-bold hover:underline">Start Shopping →</a>
+                                        <a href="/index.php" class="text-brand-accent font-bold hover:underline">Start Shopping →</a>
                                     </td>
                                 </tr>
                             <?php else: ?>
@@ -171,7 +180,7 @@ try {
                                                 </div>
                                                 <div>
                                                     <p class="font-bold text-brand-dark line-clamp-1 max-w-[150px]"><?php echo htmlspecialchars($order['product_name']); ?></p>
-                                                    <p class="text-xs text-brand-gold font-bold mt-0.5">Qty: <?php echo $order['quantity']; ?></p>
+                                                    <p class="text-xs text-brand-accent font-bold mt-0.5">Qty: <?php echo $order['quantity']; ?></p>
                                                 </div>
                                             </div>
                                         </td>
@@ -231,8 +240,6 @@ try {
 
         </div>
     </main>
-
-    <?php include '../includes/footer.php'; ?>
 
     <script>
         function copyTracking(elementId) {

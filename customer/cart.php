@@ -84,39 +84,51 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - RajaRam & Sons</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
                     colors: {
-                        brand: { dark: '#0A192F', gold: '#B7915F', hover: '#D4AF37', light: '#F8FAFC' }
-                    }
+                        brand: {
+                            'dark': '#0A192F', 'accent': '#B7915F', 'accent-light': '#D4AF37', 
+                            'muted': '#7289A0', 'light': '#F8FAFC', 'cream': '#FDFBF6'
+                        }
+                    },
+                    fontFamily: { 'sans': ['Inter', 'sans-serif'], 'display': ['Playfair Display', 'serif'] }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-brand-light text-brand-dark font-sans antialiased flex flex-col min-h-screen">
+<body class="bg-brand-cream text-brand-dark font-sans antialiased">
 
-    <?php include '../includes/header.php'; ?>
-
-    <section class="max-w-7xl mx-auto px-6 py-12 flex-1 w-full">
-        <div class="mb-10 border-b border-gray-200 pb-5">
-            <h4 class="text-brand-gold font-bold uppercase tracking-widest text-xs mb-1">Review Your Selection</h4>
-            <h2 class="text-3xl font-serif font-bold text-brand-dark">Your Shopping Cart</h2>
+    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-brand-light/50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/index.php" class="flex flex-col group">
+                <h1 class="text-3xl font-extrabold font-display text-transparent bg-clip-text bg-gradient-to-r from-brand-dark to-brand-accent tracking-tight">
+                    RajaRam & Sons
+                </h1>
+                <p class="text-brand-muted text-[10px] tracking-[0.3em] uppercase font-bold mt-0.5">The Grand Music Mall</p>
+            </a>
+            <div class="text-sm font-semibold text-brand-muted">
+                Welcome, <span class="text-brand-dark"><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+            </div>
         </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 py-12">
+        <h2 class="text-4xl font-extrabold font-display mb-10 tracking-tight text-brand-dark">Your Shopping Cart 🛒</h2>
 
         <?php if (empty($cart_items)): ?>
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-16 text-center max-w-xl mx-auto">
-                <div class="w-24 h-24 bg-brand-light rounded-full flex items-center justify-center mx-auto mb-6 text-brand-gold">
+            <div class="bg-white rounded-2xl shadow-sm border border-brand-light p-16 text-center max-w-xl mx-auto">
+                <div class="w-24 h-24 bg-brand-light rounded-full flex items-center justify-center mx-auto mb-6 text-brand-accent">
                     <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                 </div>
-                <h3 class="text-2xl font-serif font-bold text-brand-dark mb-3">Your Cart is Empty</h3>
-                <p class="text-gray-500 mb-8 leading-relaxed">Looks like you haven't added any musical instruments to your cart yet. Explore our royal collections now!</p>
-                <a href="/index.php" class="bg-brand-dark text-white px-8 py-3.5 rounded-full font-bold hover:bg-brand-gold transition-colors shadow-md uppercase tracking-wider text-sm">
+                <h3 class="text-2xl font-bold text-brand-dark mb-3 font-display">Your Cart is Empty</h3>
+                <p class="text-brand-muted mb-8 leading-relaxed">Looks like you haven't added any musical instruments to your cart yet. Explore our royal collections now!</p>
+                <a href="/index.php" class="bg-brand-dark text-white px-8 py-3.5 rounded-lg font-bold hover:bg-brand-accent transition-all shadow-md uppercase tracking-wider text-sm">
                     Start Shopping
                 </a>
             </div>
@@ -136,12 +148,12 @@ try {
                                     <?php if (!empty($item['image'])): ?>
                                         <img src="/uploads/<?php echo htmlspecialchars($item['image']); ?>" class="w-full h-full object-cover rounded-lg">
                                     <?php else: ?>
-                                        <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"></path></svg>
+                                        <svg class="w-8 h-8 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"></path></svg>
                                     <?php endif; ?>
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-lg text-brand-dark mb-1"><?php echo htmlspecialchars($item['product_name']); ?></h4>
-                                    <p class="text-brand-gold font-semibold text-sm">₹<?php echo number_format($item['price'], 2); ?> each</p>
+                                    <p class="text-brand-accent font-semibold text-sm">₹<?php echo number_format($item['price'], 2); ?> each</p>
                                 </div>
                             </div>
 
@@ -153,7 +165,7 @@ try {
                                 </div>
 
                                 <div class="text-right min-w-[100px]">
-                                    <p class="font-extrabold text-lg text-brand-dark font-serif">₹<?php echo number_format($item_total, 2); ?></p>
+                                    <p class="font-extrabold text-lg text-brand-dark font-display">₹<?php echo number_format($item_total, 2); ?></p>
                                 </div>
 
                                 <a href="cart.php?action=delete&cart_id=<?php echo $item['cart_id']; ?>" class="text-red-400 hover:text-red-600 transition-colors p-2 bg-red-50 hover:bg-red-100 rounded-lg" title="Remove item">
@@ -167,7 +179,7 @@ try {
                 <div class="bg-white rounded-2xl border border-brand-light p-8 shadow-sm space-y-6">
                     <h3 class="text-xl font-bold text-brand-dark pb-4 border-b border-brand-light">Order Summary</h3>
                     
-                    <div class="space-y-4 text-sm font-medium text-gray-500">
+                    <div class="space-y-4 text-sm font-medium text-brand-muted">
                         <div class="flex justify-between">
                             <span>Subtotal</span>
                             <span class="text-brand-dark font-bold">₹<?php echo number_format($subtotal, 2); ?></span>
@@ -178,11 +190,11 @@ try {
                         </div>
                         <div class="border-t border-brand-light pt-4 flex justify-between text-lg font-extrabold text-brand-dark">
                             <span>Total Amount</span>
-                            <span class="text-brand-gold font-serif">₹<?php echo number_format($subtotal, 2); ?></span>
+                            <span class="text-brand-accent font-display">₹<?php echo number_format($subtotal, 2); ?></span>
                         </div>
                     </div>
 
-                    <a href="checkout.php" class="w-full bg-gradient-to-r from-brand-gold to-brand-hover text-brand-dark font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all block text-center uppercase tracking-wider text-sm transform hover:-translate-y-0.5">
+                    <a href="checkout.php" class="w-full bg-gradient-to-r from-brand-accent to-brand-accent-light text-brand-dark font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all block text-center uppercase tracking-wider text-sm transform hover:-translate-y-0.5">
                         Proceed to Checkout
                     </a>
                     
@@ -194,8 +206,6 @@ try {
             </div>
         <?php endif; ?>
     </section>
-
-    <?php include '../includes/footer.php'; ?>
 
     <?php if (!empty($swal_icon)): ?>
     <script>

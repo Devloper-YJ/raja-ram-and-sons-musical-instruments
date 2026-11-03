@@ -53,11 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login - RajaRam & Sons</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: { extend: { fontFamily: { serif: ['Playfair Display', 'serif'] } } }
-        }
-    </script>
     <style>
         /* From Uiverse.io by Yaya12085 - adapted for login popup */
         .card {
@@ -181,7 +176,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="max-w-md w-full bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-slate-100 overflow-hidden">
         <div class="bg-slate-50 px-8 py-6 border-b border-slate-200 text-center">
-            <h2 class="text-3xl font-extrabold font-serif text-[#0A192F]">Welcome Back</h2>
+            <h2 class="text-3xl font-extrabold font-display text-[#0A192F]">Welcome Back</h2>
             <p class="text-sm text-slate-500 mt-1">Sign in to your music mall account</p>
         </div>
 

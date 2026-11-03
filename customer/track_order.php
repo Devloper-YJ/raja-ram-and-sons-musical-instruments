@@ -59,7 +59,7 @@ function getStatusUI($status) {
             theme: {
                 extend: {
                     colors: {
-                        brand: { 'dark': '#0A192F', 'gold': '#B7915F', 'hover': '#D4AF37', 'light': '#F8FAFC' }
+                        brand: { 'dark': '#0A192F', 'accent': '#B7915F', 'accent-light': '#D4AF37', 'cream': '#FDFBF6' }
                     },
                     fontFamily: { 'sans': ['Inter', 'sans-serif'], 'display': ['Playfair Display', 'serif'] }
                 }
@@ -67,7 +67,7 @@ function getStatusUI($status) {
         }
     </script>
 </head>
-<body class="bg-brand-light font-sans antialiased text-slate-800 relative min-h-screen">
+<body class="bg-brand-cream font-sans antialiased text-slate-800 relative min-h-screen">
 
     <div class="absolute top-0 left-0 w-full h-80 bg-[#0A192F] z-0 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23b7915f\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
@@ -77,9 +77,9 @@ function getStatusUI($status) {
         
         <div class="flex items-center justify-between mb-8">
             <div>
-                <h1 class="text-3xl font-extrabold font-serif text-white tracking-tight">Track Your Order</h1>
+                <h1 class="text-3xl font-extrabold font-display text-white tracking-tight">Track Your Order</h1>
                 <div class="flex items-center gap-3 mt-1.5">
-                    <p class="text-sm text-slate-300 font-medium">Order ID: <span class="text-brand-hover font-bold">#ORD-<?php echo str_pad($order['oid'], 4, '0', STR_PAD_LEFT); ?></span></p>
+                    <p class="text-sm text-slate-300 font-medium">Order ID: <span class="text-brand-accent-light font-bold">#ORD-<?php echo str_pad($order['oid'], 4, '0', STR_PAD_LEFT); ?></span></p>
                     <span class="inline-flex items-center gap-1 bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest">
                         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
                         Verified
@@ -125,7 +125,7 @@ function getStatusUI($status) {
             <?php endif; ?>
 
             <div class="flex items-center gap-3 mb-8">
-                <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <svg class="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <h4 class="text-sm font-bold text-brand-dark uppercase tracking-widest">Order Updates</h4>
             </div>
             
@@ -134,7 +134,7 @@ function getStatusUI($status) {
                     Your order has just been placed. Updates will appear here shortly! ⏳
                 </div>
             <?php else: ?>
-                <div class="relative border-l-2 border-brand-gold/30 ml-6 pl-8 space-y-10 pb-4">
+                <div class="relative border-l-2 border-brand-accent/30 ml-6 pl-8 space-y-10 pb-4">
                     
                     <?php foreach($history as $index => $track): 
                         $ui = getStatusUI($track['status']);
